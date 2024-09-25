@@ -48,11 +48,20 @@ target_sources(${PROJECT_NAME} PRIVATE
 	src/base/Engine.h
 	src/base/Entity.h
 	src/base/BaseInterfaces.h
-	src/base/Transform.h
-	src/base/Vector2D.h
 	src/base/systems/EntityManager.h
 	src/base/systems/EntityManager.cpp
 	src/base/Helpers.h
+	src/entities/DebugEntity.h
+	src/entities/DebugEntity.cpp
+	src/base/systems/UIManager.h
+	src/base/systems/UIManager.cpp
+	src/base/Contexts.h
+	src/entities/map/Map.h
+	src/entities/map/Map.cpp
+	src/entities/map/MapData.h
+	src/entities/map/MapData.cpp
+	src/noise/SimplexNoise.hpp
+	src/noise/SimplexNoise.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system sfml-window uuid_v4::uuid_v4)

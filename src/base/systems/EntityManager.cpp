@@ -2,6 +2,8 @@
 
 EntityManager::EntityManager() :
     m_entities(),
+    m_drawableEntities(),
+    m_updatableEntities(),
     m_uuidGenerator()
 {
 }
@@ -14,6 +16,17 @@ const std::string EntityManager::RegisterEntity(std::shared_ptr<Entity> entity, 
         throw EntityManager::EntityAlreadyRegisteredError("Entity with name '" + actualID + "' is already registered");
     }
     m_entities.insert({ actualID, entity });
+
+    std::shared_ptr<DrawableEntity> drawable = std::dynamic_pointer_cast<DrawableEntity>(entity);
+    if (drawable != nullptr)
+    {
+        m_drawableEntities.insert({ actualID, drawable });
+    }
+    std::shared_ptr<UpdatableEntity> updatable = std::dynamic_pointer_cast<UpdatableEntity>(entity);
+    if (updatable != nullptr)
+    {
+        m_updatableEntities.insert({ actualID, updatable });
+    }
 
     return actualID;
 }
@@ -36,6 +49,21 @@ std::shared_ptr<Entity> EntityManager::GetEntity(const std::string& id)
         throw EntityManager::EntityDoesntExistError("Entity with name '" + id + "' doesn't exist");
     }
     return foundIt->second;
+}
+
+const std::map<std::string, std::shared_ptr<Entity>>& EntityManager::GetEntities() const
+{
+    return m_entities;
+}
+
+const std::map<std::string, std::shared_ptr<DrawableEntity>>& EntityManager::GetDrawableEntities() const
+{
+    return m_drawableEntities;
+}
+
+const std::map<std::string, std::shared_ptr<UpdatableEntity>>& EntityManager::GetUpdatableEntities() const
+{
+    return m_updatableEntities;
 }
 
 void EntityManager::RemoveEntity(std::shared_ptr<Entity> entity)

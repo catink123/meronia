@@ -5,12 +5,19 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include "../entities/DebugEntity.h"
+#include "../entities/map/Map.h"
 
 class Engine
 {
 public:
+    static const unsigned int BASE_WIDTH = 1280;
+    static const unsigned int BASE_HEIGHT = 720;
+
+public:
     Engine();
 
+public:
     void Run();
 
 private:
@@ -21,11 +28,6 @@ private:
     sf::RenderWindow m_window;
     sf::Clock m_frameClock;
     float m_lastFrameTime;
-
-    sf::RectangleShape m_tempShape;
-    sf::RectangleShape m_windowOutline;
-
-    sf::Vector2u m_prevWindowSize;
 
     EntityManager m_entityManager;
 };

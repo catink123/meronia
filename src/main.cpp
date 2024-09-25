@@ -6,5 +6,5 @@ int main()
 
     engine.Run();
 
-    return 1;
+    return 0;
 }

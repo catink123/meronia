@@ -2,22 +2,28 @@
 #include <memory>
 #include "BaseInterfaces.h"
 
-class Entity : std::enable_shared_from_this<Entity>
+class Entity : public std::enable_shared_from_this<Entity>
 {
 public:
     virtual ~Entity()
     {
     }
+
+public:
+    std::shared_ptr<Entity> GetBase()
+    {
+        return std::dynamic_pointer_cast<Entity>(shared_from_this());
+    }
 };
 
-class DrawableEntity : public Entity, public IDrawable
+class DrawableEntity : public virtual Entity, public IDrawable
 {
 public:
-    virtual void Draw() override = 0;
+    virtual void Draw(const DrawContext& context) const override = 0;
 };
 
-class UpdatableEntity : public Entity, public IUpdatable
+class UpdatableEntity : public virtual Entity, public IUpdatable
 {
 public:
-    virtual void Update(const float& deltaT) override = 0;
+    virtual void Update(const UpdateContext& context) override = 0;
 };
