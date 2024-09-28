@@ -28,7 +28,7 @@ MapData::MapData() :
 void MapData::GenerateFromSeed(unsigned int seed)
 {
     SimplexNoise noise;
-    //noise.setSeed(seed);
+    noise.setSeed(seed);
 
     const unsigned int mapWidth = CHUNK_WIDTH * Chunk::SIZE;
     const unsigned int mapHeight = CHUNK_HEIGHT * Chunk::SIZE;
@@ -39,9 +39,8 @@ void MapData::GenerateFromSeed(unsigned int seed)
         const unsigned int y = i / mapWidth;
 
         double noiseValue = noise.unsignedFBM((double)x / 50, 0, 8, 2, 0.5);
-        //double noiseValue = noise.unsignedRawNoise((double)x / 20, 0);
 
-        Block block = (noiseValue * mapHeight / 2 + mapHeight / 4) <= y ? Block::Stone : Block::Air;
+        Block block = (noiseValue * 10 + mapHeight / 2) <= y ? Block::Stone : Block::Air;
         if (block != Block::Air)
         {
             printf("");
@@ -74,4 +73,9 @@ Block MapData::GetBlock(unsigned int x, unsigned int y) const
 const std::array<Chunk, MapData::CHUNK_COUNT>& MapData::GetChunks() const
 {
     return m_chunks;
+}
+
+sf::Vector2i MapData::GetMapSize()
+{
+    return sf::Vector2i(CHUNK_WIDTH * Chunk::SIZE, CHUNK_HEIGHT * Chunk::SIZE);
 }

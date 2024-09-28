@@ -6,6 +6,7 @@ class EntityManager;
 struct DrawContext
 {
     sf::RenderWindow& window;
+    const sf::Vector2f& viewOffset;
 };
 
 struct UpdateContext

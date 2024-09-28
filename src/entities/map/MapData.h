@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include "../../noise/SimplexNoise.hpp"
+#include <SFML/System/Vector2.hpp>
 
 enum class Block : unsigned char
 {
@@ -30,8 +31,8 @@ private:
 class MapData
 {
 public:
-    static const unsigned int CHUNK_WIDTH = 12;
-    static const unsigned int CHUNK_HEIGHT = 6;
+    static const unsigned int CHUNK_WIDTH = 48;
+    static const unsigned int CHUNK_HEIGHT = 24;
     static const unsigned int CHUNK_COUNT = CHUNK_WIDTH * CHUNK_HEIGHT;
 
 public:
@@ -44,6 +45,9 @@ public:
     void SetBlock(unsigned int x, unsigned int y, Block block);
     Block GetBlock(unsigned int x, unsigned int y) const;
     const std::array<Chunk, MapData::CHUNK_COUNT>& GetChunks() const;
+
+public:
+    static sf::Vector2i GetMapSize();
 
 private:
     std::array<Chunk, MapData::CHUNK_COUNT> m_chunks;

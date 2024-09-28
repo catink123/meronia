@@ -1,11 +1,14 @@
 #include "Engine.h"
 
 Engine::Engine() :
-    m_window(sf::VideoMode(BASE_WIDTH, BASE_HEIGHT), "Meronia", sf::Style::Default, sf::ContextSettings(0, 0, 8, 1, 1, 0, false)),
+    m_window(sf::VideoMode(CommonConstants::WINDOW_BASE_WIDTH, CommonConstants::WINDOW_BASE_HEIGHT), CommonConstants::GAME_TITLE, sf::Style::Default, sf::ContextSettings(0, 0, 8, 1, 1, 0, false)),
     m_entityManager(),
-    m_lastFrameTime(0)
+    m_frameClock(),
+    m_lastFrameTime(0),
+    m_viewOffset()
 {
-    m_entityManager.RegisterEntity(std::make_shared<Map>()->GetBase());
+    m_entityManager.RegisterEntity(std::make_shared<Map>()->GetBase(), "map");
+    m_entityManager.RegisterEntity(std::make_shared<DebugEntity>()->GetBase(), "debug");
 }
 
 void Engine::Run()
@@ -25,19 +28,20 @@ void Engine::Run()
 
                 float viewWidth;
                 float viewHeight;
-                if (newAspectRatio > (float)BASE_WIDTH / (float)BASE_HEIGHT)
+                if (newAspectRatio > (float)CommonConstants::WINDOW_BASE_WIDTH / (float)CommonConstants::WINDOW_BASE_HEIGHT)
                 {
-                    viewWidth = (float)BASE_HEIGHT * newAspectRatio;
-                    viewHeight = (float)BASE_HEIGHT;
+                    viewWidth = (float)CommonConstants::WINDOW_BASE_HEIGHT * newAspectRatio;
+                    viewHeight = (float)CommonConstants::WINDOW_BASE_HEIGHT;
                 }
                 else
                 {
-                    viewWidth = (float)BASE_WIDTH;
-                    viewHeight = (float)BASE_WIDTH / newAspectRatio;
+                    viewWidth = (float)CommonConstants::WINDOW_BASE_WIDTH;
+                    viewHeight = (float)CommonConstants::WINDOW_BASE_WIDTH / newAspectRatio;
                 }
 
-                float viewOffsetX = -(viewWidth / 2 - BASE_WIDTH / 2);
-                float viewOffsetY = -(viewHeight / 2 - BASE_HEIGHT / 2);
+                float viewOffsetX = -(viewWidth / 2 - CommonConstants::WINDOW_BASE_WIDTH / 2);
+                float viewOffsetY = -(viewHeight / 2 - CommonConstants::WINDOW_BASE_HEIGHT / 2);
+                m_viewOffset = sf::Vector2f(-viewOffsetX, -viewOffsetY);
 
                 m_window.setView(sf::View(sf::FloatRect(viewOffsetX, viewOffsetY, viewWidth, viewHeight)));
             }
@@ -68,7 +72,7 @@ void Engine::Run()
 
 void Engine::draw()
 {
-    DrawContext context{ m_window };
+    DrawContext context{ m_window, m_viewOffset };
 
     m_window.clear();
 

@@ -55,7 +55,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	src/entities/map/MapData.cpp
 	src/noise/SimplexNoise.hpp
 	src/noise/SimplexNoise.cpp
- "src/base/systems/UUIDGenerator.h" "src/base/systems/InputManager.h" "src/base/systems/InputManager.cpp")
+ "src/base/systems/UUIDGenerator.h" "src/base/systems/InputManager.h" "src/base/systems/InputManager.cpp" "src/base/CommonConstants.h")
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system sfml-window)
 

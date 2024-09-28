@@ -1,9 +1,13 @@
 #pragma once
 #include "../../base/Entity.h"
 #include "MapData.h"
+#include "../../base/CommonConstants.h"
 
 class Map : public DrawableEntity, public UpdatableEntity
 {
+public:
+    static const int TILE_SIZE = 10;
+
 public:
     Map();
 
@@ -13,4 +17,5 @@ public:
 
 private:
     MapData m_data;
+    sf::Vector2f m_offset;
 };

@@ -7,13 +7,10 @@
 #include <SFML/System.hpp>
 #include "../entities/DebugEntity.h"
 #include "../entities/map/Map.h"
+#include "CommonConstants.h"
 
 class Engine
 {
-public:
-    static const unsigned int BASE_WIDTH = 1280;
-    static const unsigned int BASE_HEIGHT = 720;
-
 public:
     Engine();
 
@@ -37,6 +34,7 @@ private:
     sf::RenderWindow m_window;
     sf::Clock m_frameClock;
     float m_lastFrameTime;
+    sf::Vector2f m_viewOffset;
 
     EntityManager m_entityManager;
 };
