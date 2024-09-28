@@ -3,14 +3,13 @@
 EntityManager::EntityManager() :
     m_entities(),
     m_drawableEntities(),
-    m_updatableEntities(),
-    m_uuidGenerator()
+    m_updatableEntities()
 {
 }
 
 const std::string EntityManager::RegisterEntity(std::shared_ptr<Entity> entity, std::optional<std::string> id)
 {
-    const std::string actualID = id.value_or(generateID());
+    const std::string actualID = id.value_or(UUID::generate_uuid());
     if (m_entities.find(actualID) != std::end(m_entities))
     {
         throw EntityManager::EntityAlreadyRegisteredError("Entity with name '" + actualID + "' is already registered");
@@ -81,9 +80,4 @@ void EntityManager::RemoveEntity(const std::string& id)
     {
         m_entities.erase(id);
     }
-}
-
-std::string EntityManager::generateID()
-{
-    return m_uuidGenerator.getUUID().str();
 }

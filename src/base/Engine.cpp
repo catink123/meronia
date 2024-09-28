@@ -5,7 +5,6 @@ Engine::Engine() :
     m_entityManager(),
     m_lastFrameTime(0)
 {
-    m_entityManager.RegisterEntity(std::make_shared<DebugEntity>()->GetBase());
     m_entityManager.RegisterEntity(std::make_shared<Map>()->GetBase());
 }
 
@@ -20,7 +19,7 @@ void Engine::Run()
             {
                 m_window.close();
             }
-            if (event.type == sf::Event::Resized)
+            else if (event.type == sf::Event::Resized)
             {
                 double newAspectRatio = (double)event.size.width / (double)event.size.height;
 
@@ -41,6 +40,20 @@ void Engine::Run()
                 float viewOffsetY = -(viewHeight / 2 - BASE_HEIGHT / 2);
 
                 m_window.setView(sf::View(sf::FloatRect(viewOffsetX, viewOffsetY, viewWidth, viewHeight)));
+            }
+            else
+            {
+                switch (event.type)
+                {
+                case sf::Event::KeyPressed:             handleKeyPressed(event.key);                    break;
+                case sf::Event::KeyReleased:            handleKeyReleased(event.key);                   break;
+                case sf::Event::MouseMoved:             handleMouseMoved(event.mouseMove);              break;
+                case sf::Event::MouseButtonPressed:     handleMouseButtonPressed(event.mouseButton);    break;
+                case sf::Event::MouseButtonReleased:    handleMouseButtonReleased(event.mouseButton);   break;
+                case sf::Event::MouseEntered:           handleMouseEntered();                           break;
+                case sf::Event::MouseLeft:              handleMouseLeft();                              break;
+                case sf::Event::MouseWheelScrolled:     handleMouseScrolled(event.mouseWheelScroll);    break;
+                }
             }
         }
 
@@ -77,5 +90,37 @@ void Engine::update(float deltaTime)
     {
         entry.second->Update(context);
     }
+}
+
+void Engine::handleKeyPressed(const sf::Event::KeyEvent& e)
+{
+}
+
+void Engine::handleKeyReleased(const sf::Event::KeyEvent& e)
+{
+}
+
+void Engine::handleMouseButtonPressed(const sf::Event::MouseButtonEvent& e)
+{
+}
+
+void Engine::handleMouseButtonReleased(const sf::Event::MouseButtonEvent& e)
+{
+}
+
+void Engine::handleMouseLeft()
+{
+}
+
+void Engine::handleMouseEntered()
+{
+}
+
+void Engine::handleMouseMoved(const sf::Event::MouseMoveEvent& e)
+{
+}
+
+void Engine::handleMouseScrolled(const sf::Event::MouseWheelScrollEvent& e)
+{
 }
 

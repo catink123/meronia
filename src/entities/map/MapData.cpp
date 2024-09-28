@@ -38,10 +38,10 @@ void MapData::GenerateFromSeed(unsigned int seed)
         const unsigned int x = i % mapWidth;
         const unsigned int y = i / mapWidth;
 
-        double noiseValue = noise.unsignedFBM((double)x / 20, 0, 8, 2, 0.5);
+        double noiseValue = noise.unsignedFBM((double)x / 50, 0, 8, 2, 0.5);
         //double noiseValue = noise.unsignedRawNoise((double)x / 20, 0);
 
-        Block block = noiseValue * mapHeight <= y ? Block::Stone : Block::Air;
+        Block block = (noiseValue * mapHeight / 2 + mapHeight / 4) <= y ? Block::Stone : Block::Air;
         if (block != Block::Air)
         {
             printf("");

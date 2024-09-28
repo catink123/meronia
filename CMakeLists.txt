@@ -20,13 +20,6 @@ FetchContent_Declare(SFML
 )
 FetchContent_MakeAvailable(SFML)
 
-FetchContent_Declare(uuid_v4
-	GIT_REPOSITORY https://github.com/crashoz/uuid_v4.git
-	GIT_SHALLOW ON
-	EXCLUDE_FROM_ALL
-)
-FetchContent_MakeAvailable(uuid_v4)
-
 set(IS_DEBUG $<BOOL:$<CONFIG:Debug>>)
 
 if (NOT ${IS_DEBUG})
@@ -62,9 +55,9 @@ target_sources(${PROJECT_NAME} PRIVATE
 	src/entities/map/MapData.cpp
 	src/noise/SimplexNoise.hpp
 	src/noise/SimplexNoise.cpp
-)
+ "src/base/systems/UUIDGenerator.h" "src/base/systems/InputManager.h" "src/base/systems/InputManager.cpp")
 
-target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system sfml-window uuid_v4::uuid_v4)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-system sfml-window)
 
 if (WIN32)
 	target_link_libraries(${PROJECT_NAME} PUBLIC sfml-main)

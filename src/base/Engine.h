@@ -24,6 +24,15 @@ private:
     void draw();
     void update(float deltaTime);
 
+    void handleKeyPressed(const sf::Event::KeyEvent& e);
+    void handleKeyReleased(const sf::Event::KeyEvent& e);
+    void handleMouseButtonPressed(const sf::Event::MouseButtonEvent& e);
+    void handleMouseButtonReleased(const sf::Event::MouseButtonEvent& e);
+    void handleMouseLeft();
+    void handleMouseEntered();
+    void handleMouseMoved(const sf::Event::MouseMoveEvent& e);
+    void handleMouseScrolled(const sf::Event::MouseWheelScrollEvent& e);
+
 private:
     sf::RenderWindow m_window;
     sf::Clock m_frameClock;

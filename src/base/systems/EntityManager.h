@@ -4,7 +4,7 @@
 #include <string>
 #include <optional>
 #include "../Helpers.h"
-#include "uuid_v4.h"
+#include "UUIDGenerator.h"
 #include "../Entity.h"
 
 class EntityManager
@@ -28,11 +28,7 @@ public:
     void RemoveEntity(const std::string& id);
 
 private:
-    std::string generateID();
-
-private:
     std::map<std::string, std::shared_ptr<Entity>> m_entities;
     std::map<std::string, std::shared_ptr<DrawableEntity>> m_drawableEntities;
     std::map<std::string, std::shared_ptr<UpdatableEntity>> m_updatableEntities;
-    UUIDv4::UUIDGenerator<std::mt19937> m_uuidGenerator;
 };

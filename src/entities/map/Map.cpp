@@ -8,7 +8,8 @@ Map::Map() :
 
 void Map::Draw(const DrawContext& context) const
 {
-    sf::RectangleShape drawRect(sf::Vector2f(1, 1));
+    static float tileSize = 10;
+    sf::RectangleShape drawRect(sf::Vector2f(tileSize, tileSize));
 
     const auto& chunks = m_data.GetChunks();
     for (unsigned int x = 0; x < MapData::CHUNK_WIDTH * Chunk::SIZE; ++x)
@@ -17,7 +18,7 @@ void Map::Draw(const DrawContext& context) const
         {
             if (m_data.GetBlock(x, y) != Block::Air)
             {
-                drawRect.setPosition(sf::Vector2f(x, y));
+                drawRect.setPosition(sf::Vector2f(x * tileSize, y * tileSize));
                 context.window.draw(drawRect);
             }
         }

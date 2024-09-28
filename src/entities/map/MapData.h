@@ -30,8 +30,8 @@ private:
 class MapData
 {
 public:
-    static const unsigned int CHUNK_WIDTH = 6;
-    static const unsigned int CHUNK_HEIGHT = 3;
+    static const unsigned int CHUNK_WIDTH = 12;
+    static const unsigned int CHUNK_HEIGHT = 6;
     static const unsigned int CHUNK_COUNT = CHUNK_WIDTH * CHUNK_HEIGHT;
 
 public:
