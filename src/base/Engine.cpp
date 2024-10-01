@@ -8,7 +8,7 @@ Engine::Engine() :
     m_viewOffset()
 {
     m_entityManager.RegisterEntity(std::make_shared<Map>()->GetBase(), "map");
-    m_entityManager.RegisterEntity(std::make_shared<DebugEntity>()->GetBase(), "debug");
+    //m_entityManager.RegisterEntity(std::make_shared<DebugEntity>()->GetBase(), "debug");
 }
 
 void Engine::Run()

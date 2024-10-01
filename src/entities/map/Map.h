@@ -6,7 +6,7 @@
 class Map : public DrawableEntity, public UpdatableEntity
 {
 public:
-    static const int TILE_SIZE = 10;
+    static const int TILE_SIZE = 32;
 
 public:
     Map();

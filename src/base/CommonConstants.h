@@ -6,4 +6,6 @@ struct CommonConstants
     static const unsigned int WINDOW_BASE_HEIGHT = 720;
 
     inline static const std::string GAME_TITLE = "Meronia";
+
+    static const unsigned int TEXTURE_TILE_SIZE = 32;
 };

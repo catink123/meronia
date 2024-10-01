@@ -14,6 +14,9 @@ public: \
     } \
 };
 
+#define CREATE_BIT(position) 1ULL << position
+#define IS_BIT_SET(number, position) number & CREATE_BIT(position) > 0
+
 template <typename K, typename V>
 using UnsortedMap = std::vector<std::pair<K, V>>;
 
